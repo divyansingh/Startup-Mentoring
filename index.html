@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<title>NOt normal ka first copy</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="not_normal.css">
+	<meta charset="utf-8" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+		integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+		crossorigin="" />
+
+	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+		integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+		crossorigin=""></script>
+
+
+
+</head>
+
+<body>
+
+
+	<nav class="nav">
+        <div class="container">
+            <div class="logo">
+               <img src="germinatelogo.png" height="50px">
+            </div>
+					
+            <div id="mainListDiv" class="main_list">
+                <ul class="navlinks">
+                	<li><div class="search-container">
+		    		<form action="/action_page.php">
+		      			<input type="text" placeholder="Search.." name="search">
+		      			<button type="submit"><i class="fa fa-search"></i></button>
+		    			</form>
+		  				</div></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                    
+		  			<li>
+  							<div class="login-container">
+    							<form action="/action_page.php">
+      								<input type="text" placeholder="Username" name="username">
+      								<input type="text" placeholder="Password" name="psw">
+      								<button type="submit">Login</button>
+   					 			</form>
+  							</div>
+					</li>
+				</ul>
+				
+
+            </div>
+            <span class="navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </div>
+    </nav>
+	<div id="mapid" style="width: 100%; height: 750px;"></div>
+	<script>
+		var mymap = L.map('mapid').setView([23.84565, 78.662109], 5.4);
+
+		L.tileLayer(
+			'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+				maxZoom: 18,
+				attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+					'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+					'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+				id: 'mapbox/streets-v11'
+			}).addTo(mymap);
+
+
+		var seedIcon = L.icon({
+			iconUrl: 'seed.png',
+
+
+			iconSize: [70, 70],
+			iconAnchor: [22, 94],
+			popupAnchor: [0, -76]
+		})
+
+		// L.marker([22.73059, 78.305054], {icon: seedIcon}).addTo(mymap)
+		// 	.bindPopup(`<h2>Plant a Seed</h2>
+		// 			<form>
+		// 				Name: <input type="text"><br>	
+		// 				<br>
+		// 				Idea?: <input type="text">
+		// 			</form>
+		// 	`).openPopup();
+
+
+		var popup = L.popup();
+
+		// function onMapClick(e) {
+		// 	popup
+		// 		.setLatLng(e.latlng)
+		// 		.setContent("You clicked the map at " + e.latlng.toString())
+		// 		.openOn(mymap);
+		// 		console.log(e.latlng)
+		// }
+
+		function removeSeed() {
+			console.log(this.popup)
+		}
+
+		function onMapClick(e) {
+			popup
+				.setLatLng(e.latlng)
+				.setContent("Plant a seed at this location? ")
+				.openOn(mymap);
+
+
+			var leafMark = L.marker(e.latlng, {
+					icon: seedIcon
+				}).addTo(mymap)
+				.bindPopup(`<h2>Plant a Seed</h2>
+				<form>
+					Name of Startup: <input type="text"><br>
+					<br>
+					Idea:<br>
+					<textarea name="idea" rows="5" cols="15"></textarea>
+					<br><br>
+					Requirement type: 
+					<select name="requirement">
+ 						 <option value="funding">Funding</option>
+                         <option value="interns">Interns</option>
+ 						 <option value="machinery">Machinery</option>
+  						 <option value="ideas">Ideas/Guidance</option>
+					</select>
+					<br><br>
+					Team Size: <input type="number" name="quantity" min="1" max="100">
+					<br><br>
+					<form>
+  <input type="radio" name="gender" value="Home Based" checked> Home Based
+  <input type="radio" name="gender" value="Office Based"> Home Based<br>
+ 
+</form>
+
+					<br><br>
+					<input type="button" value="remove" onclick="removeSeed()">
+					<input type="button" value="Submit" onclick="submitSeed()">
+				</form>
+		`).openPopup();
+			console.log(e.latlng)
+		}
+
+		mymap.on('click', onMapClick);
+	</script>
+
+
+
+
+
+</body>
+
+</html>
