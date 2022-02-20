@@ -1,0 +1,27 @@
+.w100{
+    width: 100%;
+}
+.flex{
+    display:flex;
+    
+}
+.fdr{
+    flex-direction:column;
+}
+.asc{
+    align-self:center;
+}
+.jcsb{
+    justify-content: space-between;
+  }
+.popuphead{
+    color: rgb(15, 92, 38);
+}
+.popup{
+    background-color: rgb(106, 145, 106);
+}
+#idae textarea {
+    height: 100px;
+    max-width: 100%;
+    resize: none;
+  }

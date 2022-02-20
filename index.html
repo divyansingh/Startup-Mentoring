@@ -7,9 +7,8 @@
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-	<!-- <link rel="stylesheet" type="text/css" href="not_normal.css"> -->
+	<link rel="stylesheet" type="text/css" href="index.css">
 	<meta charset="utf-8" />
-	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
@@ -27,88 +26,19 @@
 </head>
 
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-bottom">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#"><img src="germinatelogo.png" height="40px"></a>
-    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
-        
-      </ul>
-     
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><i class="fas fa-user-plus"></i>  Signup</a></li>
-        <li><a href="#"><i class="fas fa-sign-in-alt"></i>  Login</a></li>
-        
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-	<!-- <nav class="nav">
-        <div class="container">
-            <div class="logo">
-               <img src="germinatelogo.png" height="50px">
-            </div>
-					
-            <div id="mainListDiv" class="main_list">
-                <ul class="navlinks">
-                	<li><div class="search-container">
-		    		<form action="/action_page.php">
-		      			<input type="text" placeholder="Search.." name="search">
-		      			<button type="submit"><i class="fa fa-search"></i></button>
-		    			</form>
-		  				</div></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                    
-		  			<li>
-  							<div class="login-container">
-    							<form action="/action_page.php">
-      								<input type="text" placeholder="Username" name="username">
-      								<input type="text" placeholder="Password" name="psw">
-      								<button type="submit">Login</button>
-   					 			</form>
-  							</div>
-					</li>
-				</ul>
-				
-
-            </div>
-            <span class="navTrigger">
-                <i></i>
-                <i></i>
-                <i></i>
-            </span>
-        </div>
-    </nav> -->
 	<div id="mapid" style="width: 100%; height: 750px;"></div>
 	<script>
 		var mymap = L.map('mapid').setView([23.84565, 78.662109], 5.4);
 
 		L.tileLayer(
 			'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-				maxZoom: 18,
-				attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-					'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-					'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-				id: 'mapbox/streets-v11'
-			}).addTo(mymap);
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+				'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			id: 'mapbox/streets-v11'
+		}).addTo(mymap);
 
 
 		var seedIcon = L.icon({
@@ -120,78 +50,56 @@
 			popupAnchor: [0, -76]
 		})
 
-		// L.marker([22.73059, 78.305054], {icon: seedIcon}).addTo(mymap)
-		// 	.bindPopup(`<h2>Plant a Seed</h2>
-		// 			<form>
-		// 				Name: <input type="text"><br>	
-		// 				<br>
-		// 				Idea?: <input type="text">
-		// 			</form>
-		// 	`).openPopup();
-
 
 		var popup = L.popup();
 
-		// function onMapClick(e) {
-		// 	popup
-		// 		.setLatLng(e.latlng)
-		// 		.setContent("You clicked the map at " + e.latlng.toString())
-		// 		.openOn(mymap);
-		// 		console.log(e.latlng)
-		// }
 
 		function removeSeed() {
 			console.log(this.popup)
 		}
 
 		function onMapClick(e) {
-			popup
-				.setLatLng(e.latlng)
-				.setContent("Plant a seed at this location? ")
-				.openOn(mymap);
-
-
 			var leafMark = L.marker(e.latlng, {
-					icon: seedIcon
-				}).addTo(mymap)
-				.bindPopup(`<h2>Plant a Seed</h2>
-				<form>
-					Name of Startup: <input type="text"><br>
-					<br>
-					Idea:<br>
-					<textarea name="idea" rows="5" cols="15"></textarea>
-					<br><br>
-					Requirement type: 
-					<select name="requirement">
- 						 <option value="funding">Funding</option>
-                         <option value="interns">Interns</option>
- 						 <option value="machinery">Machinery</option>
-  						 <option value="ideas">Ideas/Guidance</option>
-					</select>
-					<br><br>
-					Team Size: <input type="number" name="quantity" min="1" max="100">
-					<br><br>
-					<form>
-  <input type="radio" name="gender" value="Home Based" checked> Home Based
-  <input type="radio" name="gender" value="Office Based"> Home Based<br>
- 
-</form>
-
-					<br><br>
-					<input type="button" value="remove" onclick="removeSeed()">
-					<input type="button" value="Submit" onclick="submitSeed()">
-				</form>
+				icon: seedIcon
+			}).addTo(mymap)
+				.bindPopup(`
+				<div class="popup flex fdr jcsb">
+				<h2 class="asc popuphead">Plant a Seed</h2>
+					<form class="asc">
+							<div >
+								<input type="text" placeholder="Name Of startup">
+							</div>
+							<div>
+								<textarea  id="idea" class="w100" placeholder="describe your idea briefly..." tabindex="5" name="idea"></textarea>
+							</div>
+							<div>
+								Requirement type: 
+								<select name="requirement">
+									<option value="funding">Funding</option>
+									<option value="interns">Interns</option>
+									<option value="machinery">Machinery</option>
+									<option value="ideas">Ideas/Guidance</option>
+								</select>
+							</div>
+							<div>
+								Team Size: <input type="number" name="quantity" min="1" max="100">
+							</div>
+							<div>
+									<form>
+										<input type="radio" name="gender" value="Home Based" checked> Home Based
+										<input type="radio" name="gender" value="Office Based"> Home Based
+									</form>
+							</div>
+							<div ><input class="w100" type="button" value="remove" onclick="removeSeed()"></div>
+							<div ><input  class="w100" type="button" value="Submit" onclick="submitSeed()"></div>
+					</form>
+				</div>
 		`).openPopup();
 			console.log(e.latlng)
 		}
 
 		mymap.on('click', onMapClick);
 	</script>
-
-
-
-
-
 </body>
 
 </html>
