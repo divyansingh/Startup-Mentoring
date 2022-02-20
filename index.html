@@ -4,7 +4,6 @@
 <head>
 
 	<title>Germinate</title>
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 	<link rel="stylesheet" type="text/css" href="index.css">
@@ -26,7 +25,22 @@
 </head>
 
 <body>
-
+	<header>
+		<h1 class="logo"><img src="./germinatelogo.png" alt="site logo" height="40px"></h1>
+		<input type="checkbox" id="nav-toggle" class="nav-toggle">
+		<nav>
+		  <ul>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Blog</a></li>
+			<li><a href="#">Contact</a></li>
+		  </ul>
+		</nav>
+		<label for="nav-toggle" class="nav-toggle-label">
+		  <span></span>
+		</label>
+	  </header>
+	  
 	<div id="mapid" style="width: 100%; height: 750px;"></div>
 	<script>
 		var mymap = L.map('mapid').setView([23.84565, 78.662109], 5.4);
