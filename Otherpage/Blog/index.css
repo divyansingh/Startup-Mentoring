@@ -1,0 +1,11 @@
+.content{
+    display: flex;
+    justify-content: center;
+    flex-direction:row;
+}
+.comingsoon{
+    transform: translateY(200px);
+    color: rgb(75, 196, 85);
+    font-size: larger;
+    font-size: 10rem;
+}
